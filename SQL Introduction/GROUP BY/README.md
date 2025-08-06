@@ -34,29 +34,29 @@ VALUES
 SELECT * FROM employee_data;
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/employee_data.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/employee_data.png)
 
 ### 1. Find the average salary of every job title
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_1.png)
 
 ### 2. Find the average salary based on level of education
 
 ```sql
 SELECT 
 	education,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY education
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_2.png)
 
 ### 3. Find the age average of every job title
 
@@ -68,14 +68,14 @@ SELECT
 	CURRENT_DATE - date_of_birth as age_in_days
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number3step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_3_step_1.png)
 
 Second step: find the age average by using nested function from table of the first step above.
 
 ```sql
 SELECT
 	job_title,
-	(AVG(age_in_days)::numeric(10,2)) as average_age
+	ROUND(AVG(age_in_days),2) as average_age
 FROM (
     SELECT
 	    *,
@@ -84,7 +84,7 @@ FROM (
 )
 GROUP BY job_title
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number3step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_3_step_2.png)
 
 ### 4. Find all employee who born in 1995 or later
 
@@ -93,7 +93,7 @@ SELECT *
 FROM employee_data
 WHERE date_of_birth > '1995-01-01'
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number4.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_4.png)
 
 ### 5. Find the age of employee when they were hired (in days)
 
@@ -106,7 +106,7 @@ SELECT
 	(hire_date - date_of_birth) as age_hired_days
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number5.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_5.png)
 
 ### 6. Find the age of employee when they were hired (in months)
 
@@ -116,11 +116,11 @@ SELECT
 	last_name,
 	date_of_birth,
 	hire_date,
-	(DATE_PART('YEAR',hire_date) - DATE_PART('YEAR', date_of_birth))*12 + 
-	   (DATE_PART('MONTH',hire_date) - DATE_PART('MONTH', date_of_birth)) as age_hired_months
+	(STRFTIME('%Y',hire_date) - STRFTIME('%Y', date_of_birth))*12 + 
+	   (STRFTIME('%m',hire_date) - STRFTIME('%m', date_of_birth)) as age_hired_months
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number6.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_6.png)
 
 ### 7. Find the age of employee when they were hired (in years)
 
@@ -130,10 +130,10 @@ SELECT
 	last_name,
 	date_of_birth,
 	hire_date,
-	DATE_PART('YEAR',hire_date) - DATE_PART('YEAR', date_of_birth) as age_hired_years
+	STRFTIME('%Y',hire_date) - STRFTIME('%Y', date_of_birth) as age_hired_years
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number7.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_7.png)
 
 ### 8. Someone who was born before 1997 is called millenial and called gen z if they were born in 1997-2012. Based on this clasification, calculate the average salary of millenial and gen z from employee_table.
 
@@ -147,13 +147,13 @@ SELECT
 	END as employee_categorical
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number8step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_8_step_1.png)
 
 Second step: use AVG() aggregate functions to calculate the average salary foe each category
 ```sql
 SELECT
 	employee_categorical,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM (
 SELECT
 	*,
@@ -165,7 +165,7 @@ FROM employee_data
 )
 GROUP BY employee_categorical
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number8step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_8_step_2.png)
 
 ### 9. There are three level of employee based on years of experience. Junior level with less tan 5 years of work experience. Mid level with 5-10 years of experience. The rest is the senior level. Based on that category, find the average salary of every level of employee.
 
@@ -177,10 +177,10 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number9step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_9_step_1.png)
 
 Second step: Make category based on the work experience with CASE statement.
 ```sql
@@ -198,17 +198,17 @@ FROM(
 		date_of_birth,
 		hire_date,
 		salary,
-		DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+		STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 	FROM employee_data
 )
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number9step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_9_step_2.png)
 
 Third step: Use nested function then AVG() agregate functions to calculate the average work experience of the employee category based on salary
 ```sql
 SELECT
 	level_employee,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM (
 	SELECT
 	*,
@@ -224,13 +224,13 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 FROM employee_data
 )
 )
 GROUP BY level_employee
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number9step3.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_9_step_3.png)
 
 ### 10. There are 3 groups based on the salary: high, medium and low. The high earn employee is the one who earns more than 80000. Lower than 70000 is considered as low earning. Meanwhile the rest is the medium. Find out the average of work experience in years for all 3 groups.
 
@@ -242,7 +242,7 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years,
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years,
 	CASE
 		WHEN salary >= 80000 THEN 'High'
 		WHEN salary < 70000 THEN 'Low'
@@ -250,13 +250,13 @@ SELECT
 	End as salary_category
 FROM employee_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number10step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_10_step_1.png)
 
 Second step: Use nested function from the previous table to calculate the average experience of 3 group based on salary.
 ```sql
 SELECT
 	salary_category,
-	AVG(age_hired_years)::numeric(10,2) as average_experience_years
+	ROUND(AVG(age_hired_years),2) as average_experience_years
 FROM (
 	SELECT 
 		first_name,
@@ -264,7 +264,7 @@ FROM (
 		date_of_birth,
 		hire_date,
 		salary,
-		DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years,
+		STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years,
 		CASE
 			WHEN salary >= 80000 THEN 'High'
 			WHEN salary < 70000 THEN 'Low'
@@ -274,4 +274,4 @@ FROM (
 )
 GROUP BY salary_category
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/GROUP%20BY/image/number10step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/GROUP%20BY/image/number_10_step_2.png)
