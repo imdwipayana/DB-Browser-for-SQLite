@@ -11,10 +11,10 @@ All of these syntaxes work in PostgreSQL. Some syntaxes might be do not work in 
 
 
 
-### 8. [WINDOW FUNCTIONS]()
-#### 8.1. [AGGREGATE WINDOW FUNCTION]()
-#### 8.2. [RANKING WINDOW FUNCTION]()
-#### 8.3. [VALUE WINDOW FUNCTION]()
+### 8. [WINDOW FUNCTIONS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WINDOWS%20FUNCTION)
+#### 8.1. [AGGREGATE WINDOW FUNCTION](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WINDOWS%20FUNCTION/AGGREGATE%20WINDOW%20FUNCTIONS)
+#### 8.2. [RANKING WINDOW FUNCTION](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WINDOWS%20FUNCTION/RANKING%20WINDOW%20FUNCTIONS)
+#### 8.3. [VALUE WINDOW FUNCTION](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WINDOWS%20FUNCTION/VALUE%20WINDOW%20FUNCTION)
 
 
 ### 9. [COMMON TABLE EXPRESSION (CTE)]()
