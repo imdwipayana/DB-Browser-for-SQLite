@@ -89,7 +89,7 @@ FROM book_data;
 --=================================================================================
 SELECT
 	*,
-	AVG(price) OVER(PARTITION BY genre ORDER BY price DESC)::numeric(10,2) as average_price
+	ROUND(AVG(price) OVER(PARTITION BY genre ORDER BY price DESC),2) as average_price
 FROM book_data;
 
 -- The result is a little bit weird. The pages column is sorted for each category, but the average price result based the row data and the preceeding data in the same category (this is the default from frame clause which is ROWS BETWEEN CURRENT ROW AND UNBOUNDED PRECEEDING). For further understanting, look for frame clause in window functions
@@ -99,8 +99,8 @@ FROM book_data;
 --=================================================================================
 SELECT
 	*,
-	AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
-	   ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)::numeric(10,2) as average_price
+	ROUND(AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
+	   ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW),2) as average_price
 FROM book_data;
 -- The result is the same with the previous one.
 --=================================================================================
@@ -108,8 +108,8 @@ FROM book_data;
 --=================================================================================
 SELECT
 	*,
-	AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
-	   ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING)::numeric(10,2) as average_price_now_next_book
+	ROUND(AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
+	   ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING),2) as average_price_now_next_book
 FROM book_data;
 
 --=================================================================================
@@ -117,8 +117,8 @@ FROM book_data;
 --=================================================================================
 SELECT
 	*,
-	AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
-	   ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING)::numeric(10,2) as average_price_now_next_two_books
+	ROUND(AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
+	   ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING),2) as average_price_now_next_two_books
 FROM book_data;
 
 --=================================================================================
@@ -126,8 +126,8 @@ FROM book_data;
 --=================================================================================
 SELECT
 	*,
-	AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
-	   ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)::numeric(10,2) as two_days_moving_average
+	ROUND(AVG(price) OVER(PARTITION BY genre ORDER BY price DESC
+	   ROWS BETWEEN 1 PRECEDING AND CURRENT ROW),2) as two_days_moving_average
 FROM book_data;
 
 -- The ROWS statement in here can be used to calculate moving average in time series data.
@@ -138,15 +138,15 @@ FROM book_data;
 -- Part one:
 SELECT
 	*,
-	AVG(pages) OVER(PARTITION BY genre ORDER BY price DESC
-	   RANGE BETWEEN CURRENT ROW AND 2 FOLLOWING)::numeric(10,2) as total_pages
+	ROUND(AVG(pages) OVER(PARTITION BY genre ORDER BY price DESC
+	   RANGE BETWEEN CURRENT ROW AND 2 FOLLOWING),2) as total_pages
 FROM book_data;
 
 -- Part two:
 SELECT
 	*,
-	SUM(pages) OVER(PARTITION BY genre ORDER BY price DESC
-	   RANGE BETWEEN CURRENT ROW AND 2 FOLLOWING)::numeric(10,2) as total_pages
+	ROUND(SUM(pages) OVER(PARTITION BY genre ORDER BY price DESC
+	   RANGE BETWEEN CURRENT ROW AND 2 FOLLOWING),2) as total_pages
 FROM book_data;
 
 --=================================================================================
