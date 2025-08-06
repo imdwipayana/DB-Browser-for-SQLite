@@ -36,7 +36,7 @@ VALUES
 SELECT * FROM employee_data;
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/employee_data.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/employee_data.png)
 
 ### 1. Order table based on salary
 
@@ -47,7 +47,7 @@ FROM employee_data
 ORDER BY salary
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_1.png)
 
 ### 2. Order table based on salary. Starting from the highest salary.
 
@@ -58,7 +58,7 @@ FROM employee_data
 ORDER BY salary DESC
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_2.png)
 
 ### 3. Order table based on date of birth starting from the youngest
 
@@ -69,7 +69,7 @@ FROM employee_data
 ORDER BY date_of_birth DESC
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number3.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_3.png)
 
 ### 4. Order table based on working experience 
 
@@ -80,54 +80,54 @@ FROM employee_data
 ORDER BY hire_date 
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number4.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_4.png)
 
 ### 5. Find the average salary of group of employee based on job title.
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) 
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number5.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_5.png)
 
 ### 6. Find the average salary of group of employee based on job title. The highest first.
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) DESC
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number6.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_6.png)
 
 ### 7. Find top three higest average salary based on job title
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) DESC
 LIMIT 3
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number7.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_7.png)
 
 ### 8. Top three average salary based on job title for millenial only
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE date_of_birth < '1997-01-01'
 GROUP BY job_title
@@ -135,14 +135,14 @@ ORDER BY AVG(salary) DESC
 LIMIT 3
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number8.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_8.png)
 
 ### 9. Find the average salary of millenial based on job_title where average salari bigger than 60000
 
 ```sql
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE date_of_birth < '1997-01-01'
 GROUP BY job_title
@@ -150,7 +150,7 @@ HAVING AVG(salary) > 60000
 ORDER BY AVG(salary) DESC
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number9.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_9.png)
 
 ### 10. Find data who is an accountant with the lowest salary.
 
@@ -164,13 +164,13 @@ WHERE job_title = 'Accountant'
 ORDER BY MIN(salary)
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number10step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_10_step_1.png)
 
 Second step: find the accountant using subquery
 
 ```sql
 SELECT
-*
+     *
 FROM employee_data
 WHERE job_title = 'Accountant' 
 	  AND salary = (SELECT 
@@ -181,4 +181,4 @@ WHERE job_title = 'Accountant'
 )
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/ORDER%20BY/image/number10step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/ORDER%20BY/image/number_10_step_2.png)
