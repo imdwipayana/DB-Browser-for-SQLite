@@ -214,6 +214,6 @@ FROM (
 The total percentage of house and senate seats are:
 
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/house_senate_100.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/SELECT/image/house_senate_100.png)
 
 
