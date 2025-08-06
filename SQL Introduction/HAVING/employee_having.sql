@@ -44,7 +44,7 @@ SELECT * FROM employee_data;
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 Having AVG(salary) > 70000
@@ -74,17 +74,17 @@ HAVING COUNT(*) > 1
 -- First step: calculate the work experience as a new column work_exp_years
 SELECT
 	*,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as work_exp_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as work_exp_years
 FROM employee_data
 
 -- Second step: use aggregate function to aggregate the average of work_exp_years
 SELECT
 	education,
-	AVG(work_exp_years)::numeric(10,2) as average_work_exp
+	ROUND(AVG(work_exp_years),2) as average_work_exp
 FROM(
 SELECT
 	*,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as work_exp_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as work_exp_years
 FROM employee_data
 )
 GROUP BY education
@@ -92,11 +92,11 @@ GROUP BY education
 -- Third step: using having to give contrain for average work experience bigger than 6
 SELECT
 	education,
-	AVG(work_exp_years)::numeric(10,2) as average_work_exp
+	ROUND(AVG(work_exp_years),2) as average_work_exp
 FROM(
 SELECT
 	*,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as work_exp_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as work_exp_years
 FROM employee_data
 )
 GROUP BY education
@@ -108,7 +108,7 @@ HAVING AVG(work_exp_years) > 6
 -- First step: using WHERE statement
 SELECT
 	education,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE education = 'Bachelor' 
 GROUP BY education
@@ -116,7 +116,7 @@ GROUP BY education
 -- Second step: using HAVING statement
 SELECT
 	education,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY education
 HAVING education = 'Bachelor'
