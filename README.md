@@ -21,29 +21,29 @@ SQL syntax tested under DB Browser for SQLite.
 ### 10. [VIEWS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/VIEWS)
 ### 11. [CREATE TABLE as SELECT (CTAS)](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/Create%20Table%20as%20SELECT)
 ### 12. [CREATE DROP ALTER](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE)
-### 13. [DATE and TIME FUNCTIONS]()
+### 13. [DATE and TIME FUNCTIONS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/DATE%20and%20TIME%20FUNCTION)
 ### 14. [NULL FUNCTIONS]()
 
 ## II. SQL Intermediate
-### 1. [SQL Function]()
-### 2. [Stored Procedure]()
+### 1. [SQL Function: COMING SOON]()
+### 2. [Stored Procedure: COMING SOON]()
 ### 2. [INDEXING: COMING SOON]()
 ### 3. [TRIGERING: COMING SOON]()
 
 
 ## II. Problem and Solution
-### 1. [NULL in JOINING Table](https://github.com/imdwipayana/PostgreSQL/tree/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table)
-### 2. [NULL in SORTING](https://github.com/imdwipayana/PostgreSQL/tree/main/Problem%20and%20Solution/NULL%20in%20SORTING)
-### 3. [JOINING GROUPING and AGGREGATING](https://github.com/imdwipayana/PostgreSQL/tree/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING)
-### 4. [COMING SOON](https://github.com/imdwipayana/PostgreSQL/tree/main/Practice/SELECT)
+### 1. [NULL in JOINING Table: COMING SOON]()
+### 2. [NULL in SORTING: COMING SOON]()
+### 3. [JOINING GROUPING and AGGREGATING: COMING SOON]()
+### 4. [COMING SOON]()
 
 ## III. Best Practices
-### 1. [WHERE Before JOIN](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/WHERE%20Before%20JOIN)
-### 2. [Avoid Function in WHERE Clause](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause)
-### 3. [Filtering Before Joining](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/Filtering%20Before%20Joining)
-### 4. [UNION vs OR](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/UNION%20vs%20OR)
-### 5. [Aggregating Before Joining](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/Aggregating%20Before%20Joining)
-### 6. [JOIN vs EXISTS vs IN](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN)
+### 1. [WHERE Before JOIN: COMING SOON]()
+### 2. [Avoid Function in WHERE Clause: COMING SOON]()
+### 3. [Filtering Before Joining: COMING SOON]()
+### 4. [UNION vs OR: COMING SOON]()
+### 5. [Aggregating Before Joining: COMING SOON]()
+### 6. [JOIN vs EXISTS vs IN: COMING SOON]()
 
 ## IV. Projects
 ### 1. [COMING SOON](https://github.com/imdwipayana/PostgreSQL/tree/main/Practice/SELECT)
