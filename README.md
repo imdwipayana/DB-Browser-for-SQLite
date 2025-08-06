@@ -20,7 +20,7 @@ SQL syntax tested under DB Browser for SQLite.
 ### 9. [COMMON TABLE EXPRESSION (CTE)](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/COMMON%20TABLE%20EXPRESSION)
 ### 10. [VIEWS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/VIEWS)
 ### 11. [CREATE TABLE as SELECT (CTAS)](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/Create%20Table%20as%20SELECT)
-### 12. [CREATE DROP ALTER]()
+### 12. [CREATE DROP ALTER](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE)
 ### 13. [DATE and TIME FUNCTIONS]()
 ### 14. [NULL FUNCTIONS]()
 
