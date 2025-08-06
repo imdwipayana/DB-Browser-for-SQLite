@@ -19,13 +19,13 @@ return_date DATE
 --=================================================================================
 INSERT INTO book_library
 VALUES 
-('A1001', 'To Kill a Mockingbird',  'W2206', CURRENT_DATE - INTERVAL '55 days', CURRENT_DATE - INTERVAL '25 days'),
-('A1002', 'The Alchemist',          'M0609', CURRENT_DATE - INTERVAL '50 days', NULL),
-('B2001', 'No Country for Old Man', 'T2305', CURRENT_DATE - INTERVAL '45 days', CURRENT_DATE - INTERVAL '20 days'),
-('B2002', 'Cloud Cuckoo Land',      'F1512', CURRENT_DATE - INTERVAL '35 days', NULL),
-('C3001', 'The Grapes of Wrath',    'S0511', CURRENT_DATE - INTERVAL '31 days', CURRENT_DATE - INTERVAL '15 days'),
-('C3002', 'Harry Potter',           'S0511', CURRENT_DATE - INTERVAL '25 days', NULL),
-('C3003', 'River Sing Me Home',     'M1809', CURRENT_DATE - INTERVAL '15 days', NULL);
+('A1001', 'To Kill a Mockingbird',  'W2206', DATE('now','-55 days'), DATE('now','-25 days')),
+('A1002', 'The Alchemist',          'M0609', DATE('now','-50 days'), NULL),
+('B2001', 'No Country for Old Man', 'T2305', DATE('now','-45 days'), DATE('now','-20 days')),
+('B2002', 'Cloud Cuckoo Land',      'F1512', DATE('now','-35 days'), NULL),
+('C3001', 'The Grapes of Wrath',    'S0511', DATE('now','-31 days'), DATE('now','-15 days')),
+('C3002', 'Harry Potter',           'S0511', DATE('now','-25 days'), NULL),
+('C3003', 'River Sing Me Home',     'M1809', DATE('now','-15 days'), NULL);
 
 --=================================================================================
 -- Call the book_library table
@@ -59,11 +59,12 @@ SELECT * FROM book_not_returned;
 --=================================================================================
 -- Save table which books that late for more than 30 days
 --=================================================================================
+DROP TABLE IF EXISTS book_late;
 CREATE TABLE book_late AS
 SELECT *,
-	CURRENT_DATE - borrowed_date as days_borrowed
+	JULIANDAY(DATE('now')) - JULIANDAY(borrowed_date) as days_borrowed
 FROM book_library
-WHERE CURRENT_DATE - borrowed_date > 30;
+WHERE JULIANDAY(DATE('now')) - JULIANDAY(borrowed_date) > 30;
 
 --=================================================================================
 -- Call the book_not_returned table
@@ -77,7 +78,7 @@ SELECT * FROM book_late;
 CREATE TABLE days_borrowed AS
 SELECT 
 	book_title,
-	CURRENT_DATE - borrowed_date as days_borrowed
+	JULIANDAY(CURRENT_DATE) - JULIANDAY(borrowed_date) as days_borrowed
 FROM book_library
 WHERE return_date is NULL;
 
