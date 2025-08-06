@@ -7,7 +7,7 @@ All of these syntaxes work in PostgreSQL. Some syntaxes might be do not work in 
 ### 4. [HAVING](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/HAVING)
 ### 5. [ORDER BY](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/ORDER%20BY)
 ### 6. [JOIN](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/JOIN)
-### 7. [AGGREGATE FUNCTIONS]()
+### 7. [AGGREGATE FUNCTIONS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS)
 
 
 
