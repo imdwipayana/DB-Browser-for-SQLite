@@ -5,7 +5,7 @@ All of these syntaxes work in PostgreSQL. Some syntaxes might be do not work in 
 ### 2. [WHERE](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WHERE)
 ### 3. [GROUP BY](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/GROUP%20BY)
 ### 4. [HAVING](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/HAVING)
-### 5. [ORDER BY]()
+### 5. [ORDER BY](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/ORDER%20BY)
 ### 6. [JOIN]()
 ### 7. [AGGREGATE FUNCTIONS]()
 
