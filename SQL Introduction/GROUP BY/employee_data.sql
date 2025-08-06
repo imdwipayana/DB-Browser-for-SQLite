@@ -44,7 +44,7 @@ SELECT * FROM employee_data;
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 
@@ -53,7 +53,7 @@ GROUP BY job_title
 --=================================================================================
 SELECT 
 	education,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY education
 
@@ -69,7 +69,7 @@ FROM employee_data
 -- Second step: find the age average by using nested function from table of the first step above.
 SELECT
 	job_title,
-	(AVG(age_in_days)::numeric(10,2)) as average_age
+	ROUND(AVG(age_in_days),2) as average_age
 FROM (
 SELECT
 	*,
@@ -107,8 +107,8 @@ SELECT
 	last_name,
 	date_of_birth,
 	hire_date,
-	(DATE_PART('YEAR',hire_date) - DATE_PART('YEAR', date_of_birth))*12 + 
-	   (DATE_PART('MONTH',hire_date) - DATE_PART('MONTH', date_of_birth)) as age_hired_months
+	(STRFTIME('%Y',hire_date) - STRFTIME('%Y', date_of_birth))*12 + 
+	   (STRFTIME('%m',hire_date) - STRFTIME('%m', date_of_birth)) as age_hired_months
 FROM employee_data
 
 --=================================================================================
@@ -119,7 +119,7 @@ SELECT
 	last_name,
 	date_of_birth,
 	hire_date,
-	DATE_PART('YEAR',hire_date) - DATE_PART('YEAR', date_of_birth) as age_hired_years
+	STRFTIME('%Y',hire_date) - STRFTIME('%Y', date_of_birth) as age_hired_years
 FROM employee_data
 
 --=================================================================================
@@ -139,7 +139,7 @@ FROM employee_data
 -- Second step: use AVG() aggregate functions to calculate the average salary foe each category
 SELECT
 	employee_categorical,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM (
 SELECT
 	*,
@@ -164,7 +164,7 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 FROM employee_data
 
 -- Second step: Make category based on the work experience with CASE statement.
@@ -182,7 +182,7 @@ FROM(
 		date_of_birth,
 		hire_date,
 		salary,
-		DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+		STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 	FROM employee_data
 )
 
@@ -190,7 +190,7 @@ FROM(
 --             work experience of the employee category based on salary
 SELECT
 	level_employee,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM (
 	SELECT
 	*,
@@ -206,7 +206,7 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years
+	STRFTIME('YEAR',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years
 FROM employee_data
 )
 )
@@ -226,7 +226,7 @@ SELECT
 	date_of_birth,
 	hire_date,
 	salary,
-	DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years,
+	STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years,
 	CASE
 		WHEN salary >= 80000 THEN 'High'
 		WHEN salary < 70000 THEN 'Low'
@@ -238,7 +238,7 @@ FROM employee_data
 --              experience of 3 group based on salary.
 SELECT
 	salary_category,
-	AVG(age_hired_years)::numeric(10,2) as average_experience_years
+	ROUND(AVG(age_hired_years),2) as average_experience_years
 FROM (
 	SELECT 
 		first_name,
@@ -246,7 +246,7 @@ FROM (
 		date_of_birth,
 		hire_date,
 		salary,
-		DATE_PART('YEAR',CURRENT_DATE) - DATE_PART('YEAR', hire_date) as age_hired_years,
+		STRFTIME('%Y',CURRENT_DATE) - STRFTIME('%Y', hire_date) as age_hired_years,
 		CASE
 			WHEN salary >= 80000 THEN 'High'
 			WHEN salary < 70000 THEN 'Low'
