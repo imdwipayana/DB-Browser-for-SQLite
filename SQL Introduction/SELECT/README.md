@@ -1,311 +1,211 @@
-# Stored Procedure
+# SELECT
+Create tabel named Canada_data contains information about provinces and teritories in Canada with population and growth rate in 2021. Data can be found in https://en.wikipedia.org/wiki/Population_of_Canada_by_province_and_territory.
 
-Create  the table:
 ```sql
-DROP TABLE IF EXISTS production_status;
+DROP TABLE IF EXISTS Canada_data;
 
-CREATE TABLE production_status (
-product_id      VARCHAR(10) PRIMARY KEY,
-production_date DATE,
-batch           INTEGER,
-total_product   INTEGER,
-status          VARCHAR(25)
+CREATE TABLE Canada_data(
+province_teritory VARCHAR(50) PRIMARY KEY,
+capital VARCHAR(50),
+population INTEGER,
+growth_rate FLOAT,
+areas FLOAT,
+house INTEGER,
+senate INTEGER,
+border_with_USA VARCHAR(10)
 );
-
-INSERT INTO production_status
-VALUES
-('P101', '2023-08-17', 1, 100, 'Delivered'),
-('P102', '2024-01-01', 2, 200, 'Shipped'),
-('P103', '2024-05-11', 3, 300, 'Check Out'),
-('P104', '2024-12-31', 4, 400, 'Delivered'),
-('P105', '2025-02-21', 5, 500, 'Delivered'),
-('P106', '2025-07-30', 6, 600, 'Shipped');
-
-SELECT * FROM production_status;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/table1.png)
+Then input all the value of Canada_data table.
+```sql
+INSERT INTO Canada_data
+VALUES 
+('Yukon',                     'Whitehorse',     40232,    12.1, 474712.68,  1,   1,  'No'),
+('British Columbia',          'Victoria',       5000879,  7.6,  922503.01,  43,  6,  'Yes'),
+('Northwestern Teritories',   'Yellowknife',    41070,    -1.7, 1143793.86, 1,   1,  'No'),
+('Alberta',                   'Edmonton',       4262635,  4.8,  640330.46,  37,  6,  'Yes'),
+('Saskatchewan',              'Regina',         1132505,  3.1,  588243.54,  14,  6,  'Yes'),
+('Nunavut',                   'Iqaluit',        36858,    2.5,  1877778.53, 1,   1,  'No'),
+('Manitoba',                  'Winipeg',        1342153,  5,    552370.99,  14,  6,  'Yes'),
+('Ontario',                   'Toronto',        14223942, 5.8,  908699.33,  122, 24, 'Yes'),
+('Quebec',                    'Quebec City',    8501833,  4.1,  1356625.27, 78,  24, 'Yes'),
+('New Brunswick',             'Fredericton',    775610,   3.8,  71388.81,   10,  10, 'Yes'),
+('Newfoundland and Labrador', 'St. Johns',      510550,   -1.8, 370514.08,  7,   6,  'No'),
+('Nova Scotia',               'Halifax',        969383,   5,    52942.27,   11,  10, 'No'),
+('Prince Edward Island',      'Charlotte Town', 154331,   8,    5686.03,    4,   4,  'No');
+```
+Call the table with syntax:
+```sql
+SELECT * FROM Canada_data;
+```
+After that the Canada_data table is shown as:
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/Canada_data.png)
 
+Basically, the * symbol represents that all the column data will be represented. If we want just a certain column, we can type the name of columns to replace the * symbol. At last, we can create a new column by doing calculation of the other column, for example by dividing population to area to find out the population density.
 
-### 1. Modify the following SQL query to be a stored procedure
-The query:
+Count the population density by dividing the population with areas.
 ```sql
 SELECT
-	COUNT(*) as total_status
-FROM production_status
-WHERE status = 'Delivered'
+	province_teritory,
+	population,
+	areas,
+	population / areas as population_density
+FROM Canada_data
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number22query.png)
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/population_density.png)
 
-The stored procedure:
+After that, count the house and senate representation by dividing population with number of house and senate seat for each province and teritory.
 ```sql
-CREATE PROCEDURE SP_query (
-	IN sp_status VARCHAR,
-	OUT sp_total_status INTEGER
+SELECT
+	province_teritory,
+	population,
+	house,
+	population/house as house_rep,
+	senate,
+	population/senate as senate_rep
+FROM Canada_data
+```
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/house_senate_rep.png)
+
+Count the population of the previous year by noticing the formula: population2021 = population2020+population2020*(growth_rate/100). It means the population2020 = population2021/(1+(growth_rate/100))
+```sql
+SELECT
+	province_teritory,
+	population,
+	growth_rate,
+	population/(1+(growth_rate/100)) as population_2020
+FROM Canada_data
+```
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/population_2020.png)
+
+Lastly, we count the population of province and teritory that has border with the USA.
+```sql
+SELECT
+	border_with_USA,
+	SUM(population) as population_in_border
+FROM Canada_data
+GROUP BY border_with_USA
+```
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/population_in_border.png)
+
+We can see that the population in the provinces and teritories that has border with USA are almost 20 times with those without sharing border.
+
+If we want to calculate the total population, the SUM() aggregate function can be used as the following syntax:
+```sql
+SELECT 
+	SUM(population) 
+FROM Canada_data
+```
+The result of that SUM() aggregation function is a number as shown as follow:
+
+
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/sum_agg.png)
+
+We can use SUM() window functions instead of the aggregation function. The different between those two results are aggregate function will give one number meanwhile window functions will create a new column with all of the column values are the total population.
+```sql
+SELECT 
+	province_teritory,
+	population,
+	SUM(population) OVER() as total_population
+FROM Canada_data
+```
+The result of that SUM() window functions can be seen in the following table:
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/sum_window.png)
+From here, we can see the benefit using window functions to calculate the percentage of population with the nested function from the previous table:
+```sql
+SELECT
+	*,
+	(((population::decimal)*100/(total_population::decimal))::numeric(10,5)) as percentage_population
+FROM (
+	SELECT 
+		province_teritory,
+		population,
+		SUM(population) OVER() as total_population
+	FROM Canada_data
 )
-LANGUAGE plpgsql
-AS
-$$
-BEGIN
+```
+The population percentage table can be seen as follow:
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/percentage_population.png)
+To make it sure, we can add all the percentage to make it 100% with the syntax:
+```sql
+SELECT
+	SUM(percentage_population) as total_percentage_population
+FROM(
 	SELECT
-		COUNT(*)
-	INTO sp_total_status
-	FROM production_status
-	WHERE status = sp_status;
-END;
-$$;
-```
-Call the stored procedure
-```sql
-CALL SP_query('Delivered', NULL)
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number11update1.png)
-
-Do the other call to see how the stored procedure works.
-```sql
-CALL SP_query('Shipped', NULL)
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number11update2.png)
-
-```sql
-CALL SP_query('Check Out', NULL)
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number11update3.png)
-
-```sql
-CALL SP_query('On Hold', NULL)
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number11update4.png)
-
-
-### 2. Create stored procedure to transfer a number of product between two warehouse.
-Create table:
-```sql
-DROP TABLE IF EXISTS table_warehouse_transfer;
-CREATE TABLE table_warehouse_transfer(
-warehouse_id VARCHAR(10) PRIMARY KEY,
-warehouse VARCHAR(25),
-in_stock INTEGER
-);
-
-INSERT INTO table_warehouse_transfer
-VALUES
-('W101', 'Toronto',  10000),
-('W102', 'Winnipeg', 20000),
-('W103', 'Calgary',  30000),
-('W104', 'Regina',   40000),
-('W105', 'Montreal', 50000);
-
-SELECT * FROM table_warehouse_transfer;
-```
-
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number22table.png)
-
-Crate the stored procedure to calculate the product transfer between warehouse.
-
-Note: The transfer will decrease the number of product from the warehouse origin and add the number of product into the warehpuse detination.
-
-```sql
-CREATE OR REPLACE PROCEDURE SP_delivery(
-	sp_origin_id VARCHAR,
-	sp_destination_id VARCHAR,
-	sp_number_product_transfer INTEGER
+		*,
+		(((population::decimal)*100/(total_population::decimal))::numeric(10,5)) as percentage_population
+	FROM (
+		SELECT 
+			province_teritory,
+			population,
+			SUM(population) OVER() as total_population
+		FROM Canada_data
 )
-LANGUAGE plpgsql
-AS
-$$
-BEGIN
-	-- decrese the number product in stock in warehouse origin
-	UPDATE table_warehouse_transfer
-	SET in_stock = in_stock - sp_number_product_transfer
-	WHERE warehouse_id = sp_origin_id;
-
-	-- increase the number product in stock in warehouse destination
-	UPDATE table_warehouse_transfer
-	SET in_stock = in_stock + sp_number_product_transfer
-	WHERE warehouse_id = sp_destination_id;
-
-	COMMIT;
-
-END;
-$$;
-```
-Call the store procedure to update 3000 products transfer from warehouse in Toronto into Montreal.
-```sql
-CALL SP_delivery('W101', 'W105', 3000);
-```
-Call the table to see the update.
-```sql
-SELECT * FROM table_warehouse_transfer;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number22update1.png)
-
-Call the store procedure to update 5000 products transfer from warehouse in Regina into Toronto.
-```sql
-CALL SP_delivery('W103', 'W101', 5000);
-```
-Call the table to see the update.
-```sql
-SELECT * FROM table_warehouse_transfer;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number22update2.png)
-
-
-### 3. Use stored procedure to insert data and the result is the table as folows: 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/table1.png)
-
-Create the header of the table:
-```sql
-DROP TABLE IF EXISTS stored_procedure;
-
-CREATE TABLE stored_procedure (
-product_id      VARCHAR(10) PRIMARY KEY,
-production_date DATE,
-batch           INTEGER,
-total_product   INTEGER,
-status          VARCHAR(25)
-);
-```
-
-Create the insert stored procedure:
-```sql
-CREATE PROCEDURE SP_insert_data(product_id VARCHAR, production_date DATE, batch INTEGER, total_product INTEGER, status VARCHAR)
-AS
-$$
-BEGIN
-	INSERT INTO stored_procedure (product_id, production_date, batch, total_product, status) VALUES ($1, $2, $3, $4, $5);
-	COMMIT;
-END;
-$$
-LANGUAGE plpgsql;
-```
-
--- Call the procedure to insert the first row data:
-```sql
-CALL SP_insert_data('P101', '2023-08-17', 1, 100, 'Delivered');
-```
-
--- Call the table to update the inserted data:
-```sql
-SELECT * FROM stored_procedure;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert1.png)
-
--- Second row data inserted (run CALL first then run SELECT):
-```sql
-CALL SP_insert_data('P102', '2024-01-01', 2, 200, 'Shipped');
-```
-```sql
-SELECT * FROM stored_procedure;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert2.png)
-
--- Third row data inserted (run CALL first then run SELECT):
-```sql
-CALL SP_insert_data('P103', '2024-05-11', 3, 300, 'Check Out');
-```
-```sql
-SELECT * FROM stored_procedure;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert3.png)
-
--- Fourth row data inserted (run CALL first then run SELECT):
-```sql
-CALL SP_insert_data('P104', '2024-12-31', 4, 400, 'Delivered');
-```
-```sql
-SELECT * FROM stored_procedure;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert4.png)
-
--- Fifth row data inserted (run CALL first then run SELECT):
-```sql
-CALL SP_insert_data('P105', '2025-02-21', 5, 500, 'Delivered');
-```
-```sql
-SELECT * FROM stored_procedure;
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert5.png)
-
--- Sixth row data inserted (run CALL first then run SELECT):
-```sql
-CALL SP_insert_data('P106', '2025-07-30', 6, 600, 'Shipped');
-```
-```sql
-SELECT * FROM stored_procedure;
-```
-
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number1insert6.png)
-
-
-### 4. Insert stored procedure to create table.
-
-```sql
-DROP TABLE IF EXISTS table_stored_procedure;
-CREATE TABLE  table_stored_procedure(
-product_id      VARCHAR(10) PRIMARY KEY,
-manufacturer    VARCHAR(50) NOT NULL,
-production_date TIMESTAMP   DEFAULT NOW() - INTERVAL '30 days',
-sold_out        TIMESTAMP   DEFAULT NOW(),
-total_sales     FLOAT
 )
+```
+The total percentage of population is exactly 100% as expected.
 
-CREATE OR REPLACE PROCEDURE SP_stored_procedure (
-product_id      VARCHAR(10),
-manufacturer    VARCHAR(50),
-total_sales     FLOAT
+
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/total_percentage_population.png)
+
+We can do the same ide to calculate the percentage of house and senate seats by calculating the total of house and senate seats with window function and then using nested function to find out the percentage of house and senate for each province and teritory.
+```sql
+SELECT
+	province_teritory,
+	house,
+	SUM(house) OVER() as total_house_seat,
+	senate,
+	SUM(senate) OVER() as total_senate_seat
+FROM Canada_data
+```
+The total house and senate seats are in the following table.
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/total_house_senate.png)
+
+```sql
+SELECT
+	province_teritory,
+	house,
+	((house::decimal/total_house_seat::decimal)*100)::numeric(10,5) as percentage_house,
+	senate,
+	((senate::decimal/total_senate_seat::decimal)*100)::numeric(10,5) as percentage_senate
+FROM (
+	SELECT
+		province_teritory,
+		house,
+		SUM(house) OVER() as total_house_seat,
+		senate,
+		SUM(senate) OVER() as total_senate_seat
+	FROM Canada_data
 )
-AS
-$$
-BEGIN
-	-- notifications:
-	IF product_id IS NULL THEN
-		RAISE EXCEPTION 'fill the product_id value';
-	END IF;
-
-	IF manufacturer IS NULL THEN
-		RAISE EXCEPTION 'fill the manufacturer value';
-	END IF;
-
-	INSERT INTO table_stored_procedure(product_id, manufacturer, total_sales) 
-	VALUES ($1, $2, $3);
-	COMMIT;
-	
-END;
-$$
-LANGUAGE plpgsql;
 ```
+The percentage of house and senate seats for each province and teritory can be seen in the following table.
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/percentage_house_senate.png)
 
-
-Call the stored procedure to insert first row data:
+To check the total percentage (must be 100%), we can use the double nested function as follow:
 ```sql
-CALL SP_stored_procedure('P101','Calgary',NULL)
+SELECT
+	SUM(percentage_house)::numeric(10,2) as total_house_percentage,
+	SUM(percentage_senate)::numeric(10,2) as total_senate_percentage
+FROM (
+	SELECT
+		province_teritory,
+		house,
+		((house::decimal/total_house_seat::decimal)*100)::numeric(10,5) as percentage_house,
+		senate,
+		((senate::decimal/total_senate_seat::decimal)*100)::numeric(10,5) as percentage_senate
+	FROM (
+		SELECT
+			province_teritory,
+			house,
+			SUM(house) OVER() as total_house_seat,
+			senate,
+			SUM(senate) OVER() as total_senate_seat
+		FROM Canada_data
+)
+)
 ```
+The total percentage of house and senate seats are:
 
-Call the table to find the inserted data:
-```sql
-SELECT * FROM table_stored_procedure
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number2insert1.png)
 
-Call the stored procedure to insert second row data:
-```sql
-CALL SP_stored_procedure('P102', 'Toronto', 200000)
-```
+![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/SELECT/image/house_senate_100.png)
 
-Call the table to find the inserted data:
-```sql
-SELECT * FROM table_stored_procedure
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number2insert2.png)
-
-Call the stored procedure to insert third row data:
-```sql
-CALL SP_stored_procedure('P103', 'Winnipeg', 300000)
-```
-
-Call the table to find the inserted data:
-```sql
-SELECT * FROM table_stored_procedure
-```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Intermediate/Stored%20Procedure/image/number2insert3.png)
 
