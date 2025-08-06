@@ -18,7 +18,7 @@ SQL syntax tested under DB Browser for SQLite.
 
 
 ### 9. [COMMON TABLE EXPRESSION (CTE)](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/COMMON%20TABLE%20EXPRESSION)
-### 10. [VIEWS]()
+### 10. [VIEWS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/VIEWS)
 ### 11. [CREATE TABLE as SELECT (CTAS)]()
 ### 12. [CREATE DROP ALTER]()
 ### 13. [DATE and TIME FUNCTIONS]()
