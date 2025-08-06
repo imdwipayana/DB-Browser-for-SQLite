@@ -230,14 +230,14 @@ WHERE cumulative_dist<=0.4
 -- First step: use CUM_DIST() to find the top percentage
 SELECT
 	*,
-	PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
 FROM book_data_sold;
 -- Second step: use WHERE to constrain the only top 40%
 SELECT
 	*
 FROM(SELECT
 	    *,
-	 PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	 ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
      FROM book_data_sold
 )
 WHERE cumulative_dist<=0.4;
@@ -250,7 +250,7 @@ FROM (SELECT
   	     *
       FROM(SELECT
       	      *,
-	          PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	          ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
            FROM book_data_sold
 )
 WHERE cumulative_dist<=0.4
@@ -260,7 +260,7 @@ WHERE cumulative_dist<=0.4
 --=================================================================================
 SELECT
 	*,
-	CUME_DIST() OVER(ORDER BY price DESC)::numeric(10,2) as example_cume_dist,
-	PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as example_percent_rank
+	ROUND(CUME_DIST() OVER(ORDER BY price DESC),2) as example_cume_dist,
+	ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as example_percent_rank
 FROM book_data_sold;
 
