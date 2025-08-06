@@ -27,26 +27,25 @@ SELECT * FROM book_date;
 --========================================================================
 SELECT 
 	*,
-	date_borrowed + interval '3 months' as next_3months_borrowed
-FROM book_date
+	DATE(date_borrowed, '3 months') AS next_3months_borrowed
+FROM book_date;
 
 --========================================================================
 -- 2. It was considered late if the book is returned more than 3 months. Find out all books that were returned late.
 --========================================================================
 SELECT 
 	*,
-	date_borrowed + interval '3 months' as next_3months_borrowed
+	DATE(date_borrowed, '3 months') AS next_3months_borrowed
 FROM book_date
-WHERE date_borrowed + interval '3 months' >= date_returned
-
+WHERE DATE(date_borrowed, '3 months') >= date_returned;
 
 --========================================================================
 -- 3. Label the book that returned late and not late in new table
 --========================================================================
-WITH CTE_book_date as (
+WITH CTE_book_date AS (
 SELECT
 	*,
-	date_borrowed + interval '3 months' as next_3months_borrowed
+	DATE(date_borrowed, '3 months') AS next_3months_borrowed
 FROM book_date
 )
 SELECT
@@ -54,16 +53,16 @@ SELECT
 	CASE
 		WHEN next_3months_borrowed < date_returned THEN 'late'
 		ELSE 'early'
-	END as late_or_early
-FROM CTE_book_date
+	END AS late_or_early
+FROM CTE_book_date;
 
 --========================================================================
 -- 4. How if the late regulation is 90 days after borrowed date? Label all books that were returned late or early.
 --========================================================================
-WITH CTE_book_date as (
+WITH CTE_book_date AS (
 SELECT
 	*,
-	date_borrowed + interval '90 days' as next_90days_borrowed
+	DATE(date_borrowed, '90 days') AS next_90days_borrowed
 FROM book_date
 )
 SELECT
@@ -71,16 +70,16 @@ SELECT
 	CASE
 		WHEN next_90days_borrowed < date_returned THEN 'late'
 		ELSE 'early'
-	END as late_or_early
-FROM CTE_book_date
+	END AS late_or_early
+FROM CTE_book_date;
 
 --========================================================================
 -- 5. Count how many days each book was borrowed? Then use the result to categorize the book tobe early or late.
 --========================================================================
-WITH CTE_returned_borrowed as (
+WITH CTE_returned_borrowed AS (
 	SELECT
 		*,
-		date_returned - date_borrowed as days_borrowed
+		JULIANDAY(date_returned) - JULIANDAY(date_borrowed) AS days_borrowed
 	FROM book_date
 )
 
@@ -89,17 +88,17 @@ SELECT
 	CASE
 		WHEN days_borrowed > 90 THEN 'late'
 		ELSE 'early'
-	END as late_early
-FROM CTE_returned_borrowed
+	END AS late_early
+FROM CTE_returned_borrowed;
 
 --========================================================================
 -- 6. Compare the question above with this method.
 --========================================================================
 SELECT
 	*,
-	EXTRACT(YEAR FROM AGE(date_returned,date_borrowed))*12*30 +  
-	EXTRACT(MONTH FROM AGE(date_returned,date_borrowed))*12+
-	EXTRACT(DAY FROM AGE(date_returned,date_borrowed))as month_returned_borrowed
+	(STRFTIME('%Y', date_returned) - STRFTIME('%Y', date_borrowed))*12*30 +
+	(STRFTIME('%m', date_returned) - STRFTIME('%m', date_borrowed))*30 +
+	(STRFTIME('%d', date_returned) - STRFTIME('%d', date_borrowed)) as month_returned_borrowed
 FROM book_date
 
 --========================================================================
@@ -108,24 +107,11 @@ FROM book_date
 
 SELECT
 	*,
-	EXTRACT(YEAR FROM AGE(date_returned,date_borrowed))*12 +  
-	EXTRACT(MONTH FROM AGE(date_returned,date_borrowed))  as month_returned_borrowed
+	(STRFTIME('%Y', date_returned) - STRFTIME('%Y', date_borrowed))*12 +
+	(STRFTIME('%m', date_returned) - STRFTIME('%m', date_borrowed)) as month_returned_borrowed
 FROM book_date
 
---========================================================================
--- 8. Check the date using function in PostgreSQL
---========================================================================
-CREATE OR REPLACE FUNCTION is_date(s VARCHAR) RETURNS BOOLEAN AS $$
-BEGIN
-    PERFORM s::DATE;
-    RETURN TRUE;
-EXCEPTION WHEN others THEN
-    RETURN FALSE;
-END;
-$$ LANGUAGE plpgsql;
 
-SELECT is_date('2023-07-14'); -- Returns TRUE
-SELECT is_date('not-a-date'); -- Returns FALSE
 
 
 
