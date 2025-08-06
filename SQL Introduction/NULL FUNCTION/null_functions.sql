@@ -30,7 +30,9 @@ SELECT * FROM chess_player;
 --========================================================================
 SELECT
 	*,
-	time_check_out - time_check_in as time_in_tournament
+	STRFTIME('%s', time_check_out)-STRFTIME('%s', time_check_in) AS time_in_second,
+   (STRFTIME('%s', time_check_out)-STRFTIME('%s', time_check_in))/60 AS time_in_minute,
+   (STRFTIME('%s', time_check_out)-STRFTIME('%s', time_check_in))/3600 AS time_in_hour
 FROM chess_player;
 
 --========================================================================
@@ -115,9 +117,9 @@ SELECT
 	winner_prize,
 	SUM(winner_prize) OVER() as money_with_null,
 	SUM(COALESCE(winner_prize,0)) OVER() as money_without_null,
-	AVG(winner_prize) OVER()::numeric(10,2) as avg_with_null,
+	ROUND(AVG(winner_prize) OVER(),2) as avg_with_null,
 	AVG(COALESCE(winner_prize,0)) OVER() avg_without_null,
-	MIN(winner_prize) OVER()::numeric(10,2) as MIN_with_null,
+	ROUND(MIN(winner_prize) OVER(),2) as MIN_with_null,
 	MIN(COALESCE(winner_prize,0)) OVER() MIN_without_null
 FROM chess_player;
 
