@@ -2,9 +2,9 @@ All of these syntaxes work in PostgreSQL. Some syntaxes might be do not work in 
 ## I. SQL Introduction
 
 ### 1. [SELECT](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/SELECT)
-### 2. [WHERE]()
-### 3. [GROUP BY]()
-### 4. [HAVING]()
+### 2. [WHERE](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/WHERE)
+### 3. [GROUP BY](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/GROUP%20BY)
+### 4. [HAVING](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/HAVING)
 ### 5. [ORDER BY]()
 ### 6. [JOIN]()
 ### 7. [AGGREGATE FUNCTIONS]()
