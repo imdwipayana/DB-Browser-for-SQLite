@@ -50,7 +50,7 @@ FROM employee_data
 -- 2. Find the average salary of all the employees
 --=================================================================================
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 
 --=================================================================================
@@ -79,13 +79,13 @@ FROM employee_data
 --=================================================================================
 -- First method: using WHERE statement
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE education = 'Bachelor'
 
 -- Second method: using HAVING statement (it is not recommended)
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY education
 HAVING education = 'Bachelor'
