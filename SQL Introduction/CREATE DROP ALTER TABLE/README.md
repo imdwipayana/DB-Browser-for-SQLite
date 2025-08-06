@@ -33,7 +33,8 @@ SELECT * FROM player
 ```
 
 The player table will be shown as:
-![create_drop_alter](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/table_player.png)
+
+![create_drop_alter](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/player_table.png)
 
 
 
@@ -51,7 +52,8 @@ WHERE player_id
     IN ('B201', 'B202');
 ```
 Call the player table again to find the update result as:
-![create_drop_alter](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/alter_table.png)
+
+![create_drop_alter](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/player_update.png)
 
 For example, if Milos Raonic decides to retired, then we need to update his status to be retired. To do this, we use the syntax:
 ```sql
@@ -63,7 +65,7 @@ Then call again the player table to see the status has been changed.
 ```sql
 SELECT * FROM player
 ```
-![create_drop_alter](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/update_status.png)
+![create_drop_alter](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/player_retired.png)
 
 Avril Lavigne wants to be a member of the club. She gives the data with syntax:
 ```sql
@@ -75,7 +77,7 @@ Then call again the player table to see a new member has been added.
 SELECT * FROM player
 ```
 
-![create_drop_alter](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/new%20member.png)
+![create_drop_alter](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/add_member.png)
 
 After some time, Avril realizes that she is a singer and wants to withdraw from the club as member. To fulfill that, we use the syntax:
 
@@ -87,7 +89,7 @@ Then call again the player table to see the update table.
 ```sql
 SELECT * FROM player
 ```
-![create_drop_alter](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/member_withdraw.png)
+![create_drop_alter](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE/image/delete_member.png)
 
 
 
