@@ -76,7 +76,7 @@ ORDER BY hire_date
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) 
@@ -86,7 +86,7 @@ ORDER BY AVG(salary)
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) DESC
@@ -96,7 +96,7 @@ ORDER BY AVG(salary) DESC
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY job_title
 ORDER BY AVG(salary) DESC
@@ -107,7 +107,7 @@ LIMIT 3
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE date_of_birth < '1997-01-01'
 GROUP BY job_title
@@ -119,7 +119,7 @@ LIMIT 3
 --=================================================================================
 SELECT 
 	job_title,
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE date_of_birth < '1997-01-01'
 GROUP BY job_title
@@ -138,7 +138,7 @@ ORDER BY MIN(salary)
 
 -- Second step: find the accountant using subquery
 SELECT
-*
+	*
 FROM employee_data
 WHERE job_title = 'Accountant' 
 	  AND salary = (SELECT 
