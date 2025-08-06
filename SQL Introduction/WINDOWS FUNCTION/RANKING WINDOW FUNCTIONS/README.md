@@ -282,7 +282,7 @@ First step: use CUM_DIST() to find the top percentage
 ```sql
 SELECT
 	*,
-	PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
 FROM book_data_sold;
 ```
 ![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/WINDOWS%20FUNCTION/RANKING%20WINDOW%20FUNCTIONS/image/number11step1.png)
@@ -294,7 +294,7 @@ SELECT
 	*
 FROM(SELECT
 	    *,
-	 PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	 ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
      FROM book_data_sold
 )
 WHERE cumulative_dist<=0.4;
@@ -310,7 +310,7 @@ FROM (SELECT
   	     *
       FROM(SELECT
       	      *,
-	          PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as cumulative_dist 
+	          ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as cumulative_dist 
            FROM book_data_sold
 )
 WHERE cumulative_dist<=0.4
@@ -323,8 +323,8 @@ WHERE cumulative_dist<=0.4
 ```sql
 SELECT
 	*,
-	CUME_DIST() OVER(ORDER BY price DESC)::numeric(10,2) as example_cume_dist,
-	PERCENT_RANK() OVER(ORDER BY price DESC)::numeric(10,2) as example_percent_rank
+	ROUND(CUME_DIST() OVER(ORDER BY price DESC),2) as example_cume_dist,
+	ROUND(PERCENT_RANK() OVER(ORDER BY price DESC),2) as example_percent_rank
 FROM book_data_sold;
 ```
 ![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/WINDOWS%20FUNCTION/RANKING%20WINDOW%20FUNCTIONS/image/number12.png)
