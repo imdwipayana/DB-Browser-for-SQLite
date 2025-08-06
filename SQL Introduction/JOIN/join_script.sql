@@ -23,7 +23,7 @@ VALUES
 --=================================================================================
 -- Call the customer table
 --=================================================================================
-SELECT * FROM customer
+SELECT * FROM customer;
 
 --=================================================================================
 -- Create cust_order table
@@ -49,7 +49,7 @@ VALUES
 --=================================================================================
 -- Call cust_order table
 --=================================================================================
-SELECT * FROM cust_order
+SELECT * FROM cust_order;
 
 --=================================================================================
 -- JOIN syntax
@@ -57,7 +57,7 @@ SELECT * FROM cust_order
 SELECT *
 FROM customer
 JOIN cust_order
-ON customer.order_id = cust_order.order_id
+ON customer.order_id = cust_order.order_id;
 
 --=================================================================================
 -- LEFT JOIN syntax
@@ -65,7 +65,7 @@ ON customer.order_id = cust_order.order_id
 SELECT *
 FROM customer
 LEFT JOIN cust_order
-ON customer.order_id = cust_order.order_id
+ON customer.order_id = cust_order.order_id;
 
 --=================================================================================
 -- RIGHT JOIN syntax
@@ -73,7 +73,7 @@ ON customer.order_id = cust_order.order_id
 SELECT *
 FROM customer
 RIGHT JOIN cust_order
-ON customer.order_id = cust_order.order_id
+ON customer.order_id = cust_order.order_id;
 
 --=================================================================================
 -- FULL JOIN syntax
@@ -81,5 +81,5 @@ ON customer.order_id = cust_order.order_id
 SELECT *
 FROM customer
 FULL JOIN cust_order
-ON customer.order_id = cust_order.order_id
+ON customer.order_id = cust_order.order_id;
 
