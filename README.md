@@ -21,7 +21,7 @@ SQL syntax tested under DB Browser for SQLite.
 ### 10. [VIEWS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/VIEWS)
 ### 11. [CREATE TABLE as SELECT (CTAS)](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/Create%20Table%20as%20SELECT)
 ### 12. [CREATE DROP ALTER](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/CREATE%20DROP%20ALTER%20TABLE)
-### 13. [DATE and TIME FUNCTIONS]()
+### 13. [DATE and TIME FUNCTIONS](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/SQL%20Introduction/DATE%20and%20TIME%20FUNCTION)
 ### 14. [NULL FUNCTIONS]()
 
 ## II. SQL Intermediate
