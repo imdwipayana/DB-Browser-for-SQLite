@@ -54,7 +54,7 @@ VALUES
 SELECT * FROM employee_data;
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/employee_data.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/employee_data.png)
 
 
 ### 1. Find the total of employee
@@ -64,16 +64,16 @@ SELECT
 FROM employee_data
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_1.png)
 
 ### 2. Find the average salary of all the employees
 ```sql
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_2.png)
 
 ### 3. Find the highest salary of all employees
 ```sql
@@ -82,7 +82,7 @@ SELECT
 FROM employee_data
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number3.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_3.png)
 
 ### 4. Find the lowest salary of all employees
 ```sql
@@ -91,7 +91,7 @@ SELECT
 FROM employee_data
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number4.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_4.png)
 
 ### 5. Calculate the total salary of all the employees
 ```sql
@@ -100,27 +100,30 @@ SELECT
 FROM employee_data
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number5.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_5.png)
 
 ### 6. Find the average salary for employee with education is Bachelor degree
 
 First method: using WHERE statement
 ```sql
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 WHERE education = 'Bachelor'
 ```
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_6_method_1.png)
+
 Second method: using HAVING statement (it is not recommended)
 ```sql
 SELECT
-	AVG(salary)::numeric(10,2) as average_salary
+	ROUND(AVG(salary),2) as average_salary
 FROM employee_data
 GROUP BY education
 HAVING education = 'Bachelor'
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number6method1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_6_method_2.png)
 
 ### 7. Find the number of employee for each level of education
 ```sql
@@ -131,7 +134,7 @@ FROM employee_data
 GROUP BY education
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number7.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_7.png)
 
 ### 8. Find out the majority of employee's education level.
 
@@ -145,7 +148,7 @@ FROM employee_data
 GROUP BY education
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number8step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_8_step_1.png)
 
 
 Second step: using ORDER BY statement with DESC to sort the number of employee from the highest to lowest in the groups. Then use LIMIT 1 to get the highest number of employees in the group.
@@ -160,7 +163,7 @@ ORDER BY COUNT(*) DESC
 LIMIT 1
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number8step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_8_step_2.png)
 
 The same result if using the nested method like the following:
 
@@ -177,3 +180,4 @@ FROM (SELECT
 ORDER BY number_employee DESC
 LIMIT 1
 ```
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/SQL%20Introduction/AGGREGATE%20FUNCTIONS/image/number_8_step_3.png)
