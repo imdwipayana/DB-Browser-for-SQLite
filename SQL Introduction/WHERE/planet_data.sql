@@ -44,7 +44,7 @@ SELECT * FROM planet_data;
 SELECT 
 	*
 FROM planet_data
-WHERE distance_from_sun < 149.6
+WHERE distance_from_sun < 149.6;
 
 --=================================================================================
 -- 2. All planets that distance farther to the Sun than the Earth
@@ -52,7 +52,7 @@ WHERE distance_from_sun < 149.6
 SELECT 
 	*
 FROM planet_data
-WHERE distance_from_sun > 149.6
+WHERE distance_from_sun > 149.6;
 
 --=================================================================================
 -- 3. All planets that smaller than the Earth
@@ -60,14 +60,14 @@ WHERE distance_from_sun > 149.6
 SELECT 
 	*
 FROM planet_data
-WHERE diameter < 12756
+WHERE diameter < 12756;
 --=================================================================================
 -- 4. All planets that bigger than the Earth
 --=================================================================================
 SELECT 
 	*
 FROM planet_data
-WHERE diameter > 12756
+WHERE diameter > 12756;
 
 --=================================================================================
 -- 5. All planets that bigger than the Earth but smaller than the Saturn
@@ -75,7 +75,7 @@ WHERE diameter > 12756
 SELECT 
 	*
 FROM planet_data
-WHERE diameter > 12756 AND diameter < 120536
+WHERE diameter > 12756 AND diameter < 120536;
 
 --=================================================================================
 -- 6. All planets that bigger but colder than the Earth
@@ -83,34 +83,38 @@ WHERE diameter > 12756 AND diameter < 120536
 SELECT 
 	*
 FROM planet_data
-WHERE diameter > 12756 AND temperature < 15
+WHERE diameter > 12756 AND temperature < 15;
 
 --=================================================================================
 -- 7. Find the biggest planet
 --=================================================================================
+-- First step:
 SELECT 
 	MAX(diameter) as biggest_planet
-FROM planet_data
+FROM planet_data;
 
+-- Second step:
 SELECT
 	*
 FROM planet_data
 WHERE diameter = (SELECT 
 					  MAX(diameter) as biggest_planet
-				  FROM planet_data)
+				  FROM planet_data);
 --=================================================================================
 -- 8. Find the farthest planet
 --=================================================================================
+-- First step:
 SELECT 
 	MAX(distance_from_sun) as farthest_planet
-FROM planet_data
+FROM planet_data;
 
+-- Second step:
 SELECT
 	*
 FROM planet_data
 WHERE distance_from_sun = (SELECT 
 					          MAX(distance_from_sun) as farthest_planet
-				           FROM planet_data)
+				           FROM planet_data);
 
 --=================================================================================
 -- 9. Find all planets that father from the sun than the smallest planet but closer to 
@@ -119,7 +123,7 @@ WHERE distance_from_sun = (SELECT
 -- First step: Find the smallest diameter of the planets
 SELECT 
 	MIN(diameter) as smallest_planet
-FROM planet_data
+FROM planet_data;
 
 -- Second step: find the distance from the Sun of the smallest planet
 SELECT
@@ -127,12 +131,12 @@ SELECT
 FROM planet_data
 WHERE diameter = (SELECT 
 				     MIN(diameter) as smallest_planet
-				  FROM planet_data)
+				  FROM planet_data);
 
 -- Third step: Find the number of most moon
 SELECT
 	MAX(number_of_moon) as most_moon
-FROM planet_data
+FROM planet_data;
 
 -- Fourth step: Find the distance from the sun of the planet that has the most moon
 SELECT
@@ -140,7 +144,7 @@ SELECT
 FROM planet_data
 WHERE number_of_moon = (SELECT
 					       MAX(number_of_moon) as most_moon
-						FROM planet_data)
+						FROM planet_data);
 						
 -- Fifth step: Use nested function in WHERE statement.
 SELECT
@@ -157,4 +161,4 @@ AND distance_from_sun < (SELECT
                          FROM planet_data
                          WHERE number_of_moon = (SELECT
 					                                MAX(number_of_moon) as most_moon
-						                         FROM planet_data))
+						                         FROM planet_data));
