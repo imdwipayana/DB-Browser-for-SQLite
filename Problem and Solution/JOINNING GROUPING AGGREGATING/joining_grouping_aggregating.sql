@@ -18,7 +18,7 @@ VALUES
 ('P105', '2025-02-21', 5, 500, 'Delivered'),
 ('P106', '2025-07-30', 6, 600, 'Shipped');
 
-SELECT * FROM production_status
+SELECT * FROM production_status;
 --========================================================================
 --The second table
 DROP TABLE IF EXISTS sales_product;
@@ -40,7 +40,7 @@ VALUES
 ('P107', 'Winnippeg', 800000),
 ('P108', 'Calgary',   900000);
 
-SELECT * FROM sales_product
+SELECT * FROM sales_product;
 --========================================================================
 -- 1. Find out total sales based on their status
 --========================================================================
@@ -53,7 +53,7 @@ WITH CTE_status_sales as (
 ), CTE_sum_sales as (
 		SELECT
 			status,
-		SUM(total_sales) OVER(PARTITION BY status)
+		SUM(total_sales) OVER(PARTITION BY status) as sales_category
 		FROM CTE_status_sales
 )
 SELECT DISTINCT
