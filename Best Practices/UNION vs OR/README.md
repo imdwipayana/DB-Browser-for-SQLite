@@ -23,7 +23,7 @@ VALUES
 
 SELECT * FROM production_status
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/production_status.png)
 
 Create  the second table:
 ```sql
@@ -49,7 +49,7 @@ VALUES
 
 SELECT * FROM sales_product
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/sales_product.png)
 
 ### 1. The product_id value on first table is noted on two columns, either in main_id or backup_in on second table. Find the total sales of all products.
 First method: using OR in the process of joining the two tables.
@@ -58,56 +58,56 @@ First method first step:
 ```sql
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id OR ps.product_id = sp.backup_id;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/first_method_step_1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/method_1_step_1.png)
 
 First method second step: selected the required columns only.
 ```sql
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id OR ps.product_id = sp.backup_id
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/first_method_step_2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/method_1_step_2.png)
 
 Second method first step:
 ```sql
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id
 UNION
 SELECT
 *
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.backup_id;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/second_method_step_1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/method_2_step_1.png)
 
 Second method second step: selected the required columns only.
 ```sql
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id
 UNION
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.backup_id;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/UNION%20vs%20OR/image/second_method_step_2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/UNION%20vs%20OR/image/method_2_step_2.png)
 
 
 Note: The second method is considered as best practice for big data.
