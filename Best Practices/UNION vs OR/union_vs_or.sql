@@ -18,7 +18,7 @@ VALUES
 ('P105', '2025-02-21', 5, 500, 'Delivered'),
 ('P106', '2025-07-30', 6, 600, 'Shipped');
 
-SELECT * FROM production_status
+SELECT * FROM production_status;
 --========================================================================
 --The second table
 DROP TABLE IF EXISTS sales_product;
@@ -41,7 +41,7 @@ VALUES
 ('P107', 'P107', 'Winnippeg', 800000),
 ('P108', 'P108', 'Calgary',   900000);
 
-SELECT * FROM sales_product
+SELECT * FROM sales_product;
 --========================================================================
 -- 1. The product_id value on first table is noted on two columns, either in main_id or backup_in on second table.
 --    Find the total sales of all products.
@@ -50,44 +50,44 @@ SELECT * FROM sales_product
 -- First method first step: 
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id OR ps.product_id = sp.backup_id;
 -- First method second step: selected the required columns only.
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
-ON ps.product_id = sp.main_id OR ps.product_id = sp.backup_id
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
+ON ps.product_id = sp.main_id OR ps.product_id = sp.backup_id;
 
 -- Second method: using UNION after joining  the to tables with matching keys.
 -- First step:
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id
 UNION
 SELECT
 *
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.backup_id;
 
 --Second step: select the required columns only.
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.main_id
 UNION
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.backup_id;
 
 -- The second method is considered as best practice for big data.
