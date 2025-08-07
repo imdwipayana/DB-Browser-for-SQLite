@@ -23,7 +23,7 @@ VALUES
 SELECT * FROM product_color_production;
 ```
 Production table:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/product_color_production.png)
 
 ```sql
 --========================================================================
@@ -48,7 +48,7 @@ VALUES
 SELECT * FROM product_color_sales;
 ```
 Sales table:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/product_color_sales.png)
 
 
 ### 1. Ignoring NULL value and do LEFT JOIN data with keys are production date and product_color
@@ -62,7 +62,7 @@ FROM product_color_production as production
 JOIN product_color_sales as sales
 ON production.production_date = sales.production_date AND production.product_color = sales.product_color;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/number_1.png)
 
 Ignoring the NULL value will impact to lose a number of data
 
@@ -90,6 +90,6 @@ FROM CTE_production as production
 JOIN CTE_sales as sales
 ON production.production_date = sales.production_date AND production.no_null_color = sales.no_null_color;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table/image/number_2.png)
 
 With NULL value tratment before the join, the data can be conserved
