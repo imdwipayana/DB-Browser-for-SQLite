@@ -48,16 +48,16 @@ SELECT
 	pj.manufacturer,
 	pj.total_production,
 	sj.total_sales
-FROM product_join as pj
-LEFT JOIN sales_join as sj
+FROM product_join AS pj
+LEFT JOIN sales_join AS sj
 ON pj.product_id = sj.product_id
-WHERE manufacturer = 'Tesla'
+WHERE manufacturer = 'Tesla';
 
 --========================================================================
 -- 2. This is the best practice
 --========================================================================
 -- Filter first table with WHERE then do the JOIN.
-WITH CTE_best_join as (
+WITH CTE_best_join AS (
 	SELECT
 		*
 	FROM product_join
@@ -68,8 +68,8 @@ SELECT
 	cbj.manufacturer,
 	cbj.total_production,
 	sj.total_sales
-FROM CTE_best_join as cbj
-LEFT JOIN sales_join as sj
+FROM CTE_best_join AS cbj
+LEFT JOIN sales_join AS sj
 ON cbj.product_id = sj.product_id;
 
 -- By filtering the first table, then the row size of the table is decreasing. It will make the join process faster. The first attempt is not efficient because the data that we don't want will do the JOIN process then filtered through WHERE. You get the feeling.
