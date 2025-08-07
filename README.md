@@ -32,9 +32,9 @@ SQL syntax tested under DB Browser for SQLite.
 
 
 ## II. Problem and Solution
-### 1. [NULL in JOINING Table: COMING SOON](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table)
-### 2. [NULL in SORTING: COMING SOON](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/NULL%20in%20SORTING)
-### 3. [JOINING GROUPING and AGGREGATING: COMING SOON](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING)
+### 1. [NULL in JOINING Table](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/NULL%20in%20JOINING%20Table)
+### 2. [NULL in SORTING](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/NULL%20in%20SORTING)
+### 3. [JOINING GROUPING and AGGREGATING](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING)
 ### 4. [COMING SOON]()
 
 ## III. Best Practices
