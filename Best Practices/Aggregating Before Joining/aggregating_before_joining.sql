@@ -44,16 +44,16 @@ SELECT * FROM sales_product;
 --========================================================================
 -- 1. Find out total sales based on their status
 --========================================================================
-WITH CTE_status_sales as (
+WITH CTE_status_sales AS (
 	SELECT
 		*
-	FROM production_status as ps
-	LEFT JOIN sales_product as sp
+	FROM production_status AS ps
+	LEFT JOIN sales_product AS sp
 	ON ps.product_id = sp.product_id
-), CTE_sum_sales as (
+), CTE_sum_sales AS (
 		SELECT
 			status,
-		SUM(total_sales) OVER(PARTITION BY status)
+		    SUM(total_sales) OVER(PARTITION BY status) AS sales_category
 		FROM CTE_status_sales
 )
 SELECT DISTINCT
