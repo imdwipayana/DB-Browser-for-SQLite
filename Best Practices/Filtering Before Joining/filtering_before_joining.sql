@@ -18,7 +18,7 @@ VALUES
 ('P105', '2025-02-21', 5, 500, 'Delivered'),
 ('P106', '2025-07-30', 6, 600, 'Shipped');
 
-SELECT * FROM production_status
+SELECT * FROM production_status;
 --========================================================================
 --The second table
 DROP TABLE IF EXISTS sales_product;
@@ -40,7 +40,7 @@ VALUES
 ('P107', 'Winnippeg', 800000),
 ('P108', 'Calgary',   900000);
 
-SELECT * FROM sales_product
+SELECT * FROM sales_product;
 --========================================================================
 -- 1. Find out total sales of all product that already delivered
 --========================================================================
@@ -48,21 +48,21 @@ SELECT * FROM sales_product
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
-WHERE ps.status = 'Delivered'
+WHERE ps.status = 'Delivered';
 
 -- Second method
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
-ON ps.product_id = sp.product_id AND ps.status = 'Delivered'
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
+ON ps.product_id = sp.product_id AND ps.status = 'Delivered';
 
 -- Third method:
-WITH CTE_filtering_joining as (
+WITH CTE_filtering_joining AS (
 	SELECT
 		*
 	FROM production_status
@@ -72,8 +72,8 @@ WITH CTE_filtering_joining as (
 SELECT
 	cfj.product_id,
 	sp.total_sales
-FROM CTE_filtering_joining as cfj
-INNER JOIN sales_product as sp
-ON cfj.product_id = sp.product_id
+FROM CTE_filtering_joining AS cfj
+INNER JOIN sales_product AS sp
+ON cfj.product_id = sp.product_id;
 
 -- Note: For small dataset, all 3 methods are applicable. But for large dataset, the third method is the best practice.
