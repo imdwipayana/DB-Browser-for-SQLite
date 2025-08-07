@@ -63,7 +63,7 @@ WHERE status = 'Delivered';
 SELECT
 	*
 FROM function_where
-WHERE EXTRACT(YEAR FROM production_date) = '2024';
+WHERE STRFTIME('%Y', production_date) = '2024';
 
 -- Second method:
 SELECT
