@@ -20,7 +20,7 @@ VALUES
 
 SELECT * FROM product_join
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/product_join.png)
 
 Create second table:
 ```sql
@@ -43,7 +43,7 @@ VALUES
 
 SELECT * FROM sales_join
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/sales_join.png)
 
 ### 1. Use LEFT JOIN first table and second table where manufacturer is Tesla
 ```sql
@@ -52,12 +52,12 @@ SELECT
 	pj.manufacturer,
 	pj.total_production,
 	sj.total_sales
-FROM product_join as pj
-LEFT JOIN sales_join as sj
+FROM product_join AS pj
+LEFT JOIN sales_join AS sj
 ON pj.product_id = sj.product_id
-WHERE manufacturer = 'Tesla'
+WHERE manufacturer = 'Tesla';
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number_1.png)
 
 
 ### 2. This is the best practice
@@ -74,15 +74,16 @@ SELECT
 	cbj.manufacturer,
 	cbj.total_production,
 	sj.total_sales
-FROM CTE_best_join as cbj
-LEFT JOIN sales_join as sj
+FROM CTE_best_join AS cbj
+LEFT JOIN sales_join AS sj
 ON cbj.product_id = sj.product_id;
 ```
 Here result of CTE_best_join
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number2part1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number_2_cte.png)
 
 And here is the final result:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number2part2.png)
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number_2.png)
 
 By filtering the first table, then the row size of the table is decreasing. It will make the join process faster. The first attempt is not efficient because the data that we don't want will do the JOIN process then filtered through WHERE. You get the feeling.
