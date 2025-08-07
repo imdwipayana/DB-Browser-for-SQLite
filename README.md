@@ -38,12 +38,12 @@ SQL syntax tested under DB Browser for SQLite.
 ### 4. [COMING SOON]()
 
 ## III. Best Practices
-### 1. [WHERE Before JOIN]()
-### 2. [Avoid Function in WHERE Clause]()
-### 3. [Filtering Before Joining]()
-### 4. [UNION vs OR]()
-### 5. [Aggregating Before Joining]()
-### 6. [JOIN vs EXISTS vs IN]()
+### 1. [WHERE Before JOIN](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/WHERE%20Before%20JOIN)
+### 2. [Avoid Function in WHERE Clause](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause)
+### 3. [Filtering Before Joining](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/Filtering%20Before%20Joining)
+### 4. [UNION vs OR](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/UNION%20vs%20OR)
+### 5. [Aggregating Before Joining](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/Aggregating%20Before%20Joining)
+### 6. [JOIN vs EXISTS vs IN](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN)
 
 ## IV. Projects
 ### 1. [COMING SOON](https://github.com/imdwipayana/PostgreSQL/tree/main/Practice/SELECT)
