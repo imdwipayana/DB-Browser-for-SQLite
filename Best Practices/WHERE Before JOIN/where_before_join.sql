@@ -17,7 +17,7 @@ VALUES
 ('P104', 'Tesla', 400),
 ('P105', 'Tesla', 500);
 
-SELECT * FROM product_join
+SELECT * FROM product_join;
 
 --=====================================================================
 -- Create second table 
@@ -39,7 +39,7 @@ VALUES
 ('P106', 65000),
 ('P107', 85000);
 
-SELECT * FROM sales_join
+SELECT * FROM sales_join;
 --========================================================================
 -- 1. Use LEFT JOIN first table and second table where manufacturer is Tesla
 --========================================================================
