@@ -23,7 +23,7 @@ VALUES
 
 SELECT * FROM function_where
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/production_data.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/function_where.png)
 
 ### 1. Check the status of all product that product_id is starting with P.
 First method:
@@ -32,8 +32,9 @@ SELECT
 	product_id,
 	status
 FROM function_where
-WHERE SUBSTRING(product_id,1,1) = 'P'
+WHERE SUBSTRING(product_id,1,1) = 'P';
 ```
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_1.png)
 
 Second method::
 ```sql
@@ -41,9 +42,9 @@ SELECT
 	product_id,
 	status
 FROM function_where
-WHERE product_id LIKE 'P%'
+WHERE product_id LIKE 'P%';
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_1_method_2.png)
 
 Note: LIKE is an operator, not a function.
 The second method is the best practice
@@ -54,17 +55,20 @@ First method:
 SELECT 
 	*
 FROM function_where
-WHERE UPPER(status) = 'DELIVERED'
+WHERE UPPER(status) = 'DELIVERED';
 ```
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_2_method_1.png)
+
 Second method:
 ```sql
 SELECT 
 	*
 FROM function_where
-WHERE status = 'Delivered'
+WHERE status = 'Delivered';
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_2_method_2.png)
 
 The second method is the best practice
 
@@ -74,20 +78,21 @@ First method:
 SELECT
 	*
 FROM function_where
-WHERE EXTRACT(YEAR FROM production_date) = '2024'
+WHERE STRFTIME('%Y', production_date) = '2024';
 ```
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_3_method_1.png)
+
 Second method:
 ```sql
 SELECT
 	*
 FROM function_where
-WHERE production_date BETWEEN '2024-01-01' AND '2024-12-31'
+WHERE production_date BETWEEN '2024-01-01' AND '2024-12-31';
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number3.png)
-
 And here is the final result:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/WHERE%20Before%20JOIN/image/number2part2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Avoid%20Function%20in%20WHERE%20Clause/image/number_3_method_2.png)
 
 The second method is the best practice.
 
