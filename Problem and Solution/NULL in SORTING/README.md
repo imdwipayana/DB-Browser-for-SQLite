@@ -30,28 +30,39 @@ VALUES
 SELECT * FROM chess_player;
 ```
 Chess player on tournament table:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/null_in_sorting_chess_player.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/chess_player.png)
 
 ### 1. Ignoring the NULL value. SORT the table based on the winning prize.
 ```sql
 SELECT
+   *
+FROM chess_player
+ORDER BY winner_prize DESC;
+```
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number_1.png)
+
+The NULL position at the bottom.
+
+### 2. Ignoring the NULL value. SORT the table based on the winning prize (ASC).
+```sql
+SELECT
 	*
 FROM chess_player
-ORDER BY winner_prize DESC
+ORDER BY winner_prize;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number1.png)
-The NULL position is in the top table
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number_2.png)
 
-### 2. Sort table based on winner prize but the NULL value must be in the last.
+The NULL position is in the top table (is it means the NULL value is the smallest in SQLite?)
+
+### 3. Sort table based on winner prize (ASC) but the NULL value must be in the last.
 ```sql
-WITH CTE_sorting as (
+WITH CTE_sorting AS (
 SELECT
 	*,
 	MIN(winner_prize) OVER(),
-	COALESCE(winner_prize,MIN(winner_prize-100) OVER()) as no_null_winner_prize
+	COALESCE(winner_prize, MAX(winner_prize+100) OVER()) AS no_null_winner_prize
 FROM chess_player
 )
-
 SELECT
 	player_id,
 	first_name,
@@ -60,33 +71,34 @@ SELECT
 	time_check_out,
 	winner_prize
 FROM CTE_sorting
-ORDER BY no_null_winner_prize DESC
+ORDER BY no_null_winner_prize;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number_3.png)
 
-### 3. We can solve the previous problem with this technique.
-First step: creat sorter as the flag for sorting
+### 4. We can solve the previous problem with this technique.
+First method: creat sorter as the flag for sorting
 ```sql
 SELECT
 	*,
 	CASE
-	   WHEN winner_prize is NULL THEN 100
-	   ELSE 200
-	END as sorter
+	   WHEN winner_prize is NULL THEN 200
+	   ELSE 100
+	END AS sorter
 FROM chess_player
-ORDER BY sorter DESC, winner_prize DESC
+ORDER BY sorter, winner_prize;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number3part1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number_4.png)
 
-Second step: put sorter directly to ORDER BY, so that its value will not appear in the table
+Second method: put sorter directly to ORDER BY, so that its value will not appear in the table
+
 ```sql
 SELECT
 	*
 FROM chess_player
 ORDER BY (CASE
-		     WHEN winner_prize is NULL THEN 100
-		     ELSE 200
-	      END) DESC
-		  , winner_prize DESC
+		     WHEN winner_prize is NULL THEN 200
+		     ELSE 100
+	      END) 
+		  , winner_prize;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number3part2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/NULL%20in%20SORTING/image/number_4.png)
