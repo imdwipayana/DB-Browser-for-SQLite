@@ -38,12 +38,12 @@ SQL syntax tested under DB Browser for SQLite.
 ### 4. [COMING SOON]()
 
 ## III. Best Practices
-### 1. [WHERE Before JOIN: COMING SOON]()
-### 2. [Avoid Function in WHERE Clause: COMING SOON]()
-### 3. [Filtering Before Joining: COMING SOON]()
-### 4. [UNION vs OR: COMING SOON]()
-### 5. [Aggregating Before Joining: COMING SOON]()
-### 6. [JOIN vs EXISTS vs IN: COMING SOON]()
+### 1. [WHERE Before JOIN]()
+### 2. [Avoid Function in WHERE Clause]()
+### 3. [Filtering Before Joining]()
+### 4. [UNION vs OR]()
+### 5. [Aggregating Before Joining]()
+### 6. [JOIN vs EXISTS vs IN]()
 
 ## IV. Projects
 ### 1. [COMING SOON](https://github.com/imdwipayana/PostgreSQL/tree/main/Practice/SELECT)
