@@ -23,7 +23,7 @@ VALUES
 
 SELECT * FROM production_status;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/production_status.png)
 
 Create  the second table:
 ```sql
@@ -48,58 +48,58 @@ VALUES
 
 SELECT * FROM sales_product;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/sales_product.png)
 
 ### 1. Find out total sales of all product that already delivered
 First step: 
 ```sql
 SELECT
      *
-FROM production_status as ps
-LEFT JOIN sales_product as sp
+FROM production_status AS ps
+LEFT JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/cte1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/cte1.png)
 
 
 Second step: 
 ```sql
-WITH CTE_status_sales as (
+WITH CTE_status_sales AS (
 	SELECT
 		*
-	FROM production_status as ps
-	LEFT JOIN sales_product as sp
+	FROM production_status AS ps
+	LEFT JOIN sales_product AS sp
 	ON ps.product_id = sp.product_id
 )
 SELECT
 	status,
-SUM(total_sales) OVER(PARTITION BY status)
+    SUM(total_sales) OVER(PARTITION BY status) AS sales_category
 FROM CTE_status_sales
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/cte2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/cte2.png)
 
 Third step: 
 ```sql
-WITH CTE_status_sales as (
+WITH CTE_status_sales AS (
 	SELECT
 		*
-	FROM production_status as ps
-	LEFT JOIN sales_product as sp
+	FROM production_status AS ps
+	LEFT JOIN sales_product AS sp
 	ON ps.product_id = sp.product_id
 ), CTE_sum_sales as (
 		SELECT
 			status,
-		SUM(total_sales) OVER(PARTITION BY status)
+		    SUM(total_sales) OVER(PARTITION BY status) as sales_category
 		FROM CTE_status_sales
 )
 SELECT DISTINCT
  	*
 FROM CTE_sum_sales;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/finalresult.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Aggregating%20Before%20Joining/image/final.png)
 
-Joining then aggregating is not a best practice (I'll update again later). Update: look the different with [Filtering Before Joining](https://github.com/imdwipayana/PostgreSQL/tree/main/Best%20Practices/Filtering%20Before%20Joining) case.
+Joining then aggregating is not a best practice (I'll update again later). Update: look the different with [Filtering Before Joining](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Best%20Practices/Filtering%20Before%20Joining) case.
 
 NOTE: In this case the required columns in the problem are located in different table.
