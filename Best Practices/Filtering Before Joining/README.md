@@ -21,9 +21,9 @@ VALUES
 ('P105', '2025-02-21', 5, 500, 'Delivered'),
 ('P106', '2025-07-30', 6, 600, 'Shipped');
 
-SELECT * FROM production_status
+SELECT * FROM production_status;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/production_status.png)
 
 Create  the second table:
 ```sql
@@ -46,9 +46,9 @@ VALUES
 ('P107', 'Winnippeg', 800000),
 ('P108', 'Calgary',   900000);
 
-SELECT * FROM sales_product
+SELECT * FROM sales_product;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/sales_product.png)
 
 ### 1. Find out total sales of all product that already delivered
 First method: joining first then filtering.
@@ -56,21 +56,23 @@ First method: joining first then filtering.
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
-WHERE ps.status = 'Delivered'
+WHERE ps.status = 'Delivered';
 ```
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/number_1_method_1.png)
 
 Second method: process of filtering in the middle of joining.
 ```sql
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
-ON ps.product_id = sp.product_id AND ps.status = 'Delivered'
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
+ON ps.product_id = sp.product_id AND ps.status = 'Delivered';
 ```
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/number_1_method_2.png)
 
 Third method: filtering first with CTE then calles CTE into the main query.
 ```sql
@@ -84,11 +86,16 @@ WITH CTE_filtering_joining as (
 SELECT
 	cfj.product_id,
 	sp.total_sales
-FROM CTE_filtering_joining as cfj
-INNER JOIN sales_product as sp
-ON cfj.product_id = sp.product_id
+FROM CTE_filtering_joining AS cfj
+INNER JOIN sales_product AS sp
+ON cfj.product_id = sp.product_id;
 ```
+The result of CTE:
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/number1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/number_1_method_3_cte.png)
+
+The final result:
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/Filtering%20Before%20Joining/image/number_1_method_3.png)
 
 Note: For small dataset, all 3 methods are applicable. But for large dataset, the third method is the best practice.
