@@ -24,7 +24,8 @@ VALUES
 SELECT * FROM production_status
 ```
 The first table:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/table1.png)
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/production_status.png)
 
 Craete second table:
 ```sql
@@ -49,8 +50,9 @@ VALUES
 
 SELECT * FROM sales_product
 ```
-The secong table:
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/table2.png)
+The second table:
+
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/sales_product.png)
 
 ### 
 ```sql
@@ -72,14 +74,14 @@ FROM CTE_sum_sales
 ```
 The result of first CTE:
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/number1step1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/first_CTE.png)
 
 The result of second CTE:
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/number1step2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/second_CTE.png)
 
 The final result:
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/number1step3.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING/image/number_1.png)
 
 Note: Joining then aggregating is not a best practice (I'll update again later).

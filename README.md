@@ -34,7 +34,7 @@ SQL syntax tested under DB Browser for SQLite.
 ## II. Problem and Solution
 ### 1. [NULL in JOINING Table: COMING SOON]()
 ### 2. [NULL in SORTING: COMING SOON]()
-### 3. [JOINING GROUPING and AGGREGATING: COMING SOON]()
+### 3. [JOINING GROUPING and AGGREGATING: COMING SOON](https://github.com/imdwipayana/DB-Browser-for-SQLite/tree/main/Problem%20and%20Solution/JOINNING%20GROUPING%20AGGREGATING)
 ### 4. [COMING SOON]()
 
 ## III. Best Practices
