@@ -23,7 +23,7 @@ FROM(
 	FROM customer
 	LIMIT 10
 ) AS Sub
-ORDER BY customer_last_name
+ORDER BY customer_last_name;
 ```
 The result of this query is the same as the previous query:
 
@@ -34,7 +34,7 @@ The table in subquery:
 SELECT
 	*
 FROM customer
-LIMIT 10
+LIMIT 10;
 ```
 
 ![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/LIMIT%20question/image/number2subquery.png)
@@ -50,7 +50,7 @@ FROM(
 	ORDER BY customer_id
 	LIMIT 10
 ) AS Sub
-ORDER BY customer_last_name
+ORDER BY customer_last_name;
 ```
 The result of this query is the same as the previous query:
 
