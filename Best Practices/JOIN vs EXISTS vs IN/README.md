@@ -23,7 +23,7 @@ VALUES
 
 SELECT * FROM production_status;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/table1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/production_status.png)
 
 Create  the second table:
 ```sql
@@ -48,7 +48,7 @@ VALUES
 
 SELECT * FROM sales_product;
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/table2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/sales_product.png)
 
 ### 1. Find out the total sales of delivered status by using WHERE, EXISTS and IN.
 First method: using WHERE
@@ -57,25 +57,25 @@ First method first step:
 ```sql
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
 WHERE ps.status = 'Delivered';
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/firstmethodstep1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/method_1_step_1.png)
 
 First method second step: select all columns that required
 ```sql
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
 WHERE ps.status = 'Delivered';
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/firstmethodstep2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/method_1_step_2.png)
 
 Second method: using EXISTS
 Second step: 
@@ -83,15 +83,15 @@ Second step:
 SELECT
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE EXISTS (SELECT 2
-			  FROM production_status as ps
+			  FROM production_status AS ps
 			  WHERE sp.product_id = ps.product_id 
 			     AND ps.status = 'Delivered'
 );
 ```
 
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/secondmethod.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/method_2.png)
 
 Third method: using IN
 
@@ -102,11 +102,11 @@ SELECT
 FROM production_status
 WHERE status = 'Delivered'
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/thirdmethodstep1.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/method_3_step_1.png)
 
 Third step second step:
 ```sql
-WITH CTE_in as (
+WITH CTE_in AS (
 SELECT
 	product_id
 FROM production_status
@@ -115,17 +115,17 @@ WHERE status = 'Delivered'
 SELECT 
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE sp.product_id in (SELECT * FROM CTE_in);
 ```
-![Library_project](https://github.com/imdwipayana/PostgreSQL/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/thirdmethodstep2.png)
+![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Best%20Practices/JOIN%20vs%20EXISTS%20vs%20IN/image/method_3_cte.png)
 
 The syntax above can be written as subquery as follow:
 ```sql
 SELECT 
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE sp.product_id in (SELECT
 			     product_id
 			FROM production_status
