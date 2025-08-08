@@ -1,5 +1,5 @@
 # LIMIT question
-In number 1, the table will be ordered then it will be taken top 10 order. In number 2, it supposed to take the first 10 row of data, then do the order based on those 10 rows. But here the number 2 result is the same with number 1. It means that the data will be ordered no mather what at first then at the end will be taken the top 10. This is a litle bit strange for me because the main query ignore the subquery table. Edward gave me solution as writen in number 3. But I'm still in question why number 1 and number 2 are the same?
+In number 1, the table will be ordered then it will be taken top 10 order. In number 2, it supposed to take the first 10 row of data first, then do the order based on those 10 rows of data. But here the number 2 result is the same with number 1. It means that the data will be ordered no mather what at first then at the end will be taken the top 10. This is a litle bit strange for me because the main query ignore the subquery table. Edward gave me solution as writen in number 3. But I'm still in question why number 1 and number 2 are the same?
 
 
 ## 1. LIMIT 10
