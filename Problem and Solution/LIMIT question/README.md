@@ -41,6 +41,8 @@ LIMIT 10;
 
 ![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/LIMIT%20question/image/number2subquery.png)
 
+Based on customer_id in this subquery, the custumer _id will not pass 10. But in the main query, the customer_id more than 10 for some customers.
+
 ## 3. 3. LIMIT 10, Edward's solution by addting ORDER BY inside the subquery
 ```sql
 SELECT
