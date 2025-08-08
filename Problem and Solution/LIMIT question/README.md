@@ -58,6 +58,5 @@ FROM(
 ) AS Sub
 ORDER BY customer_last_name;
 ```
-The result of this query is the same as the previous query:
 
 ![Library_project](https://github.com/imdwipayana/DB-Browser-for-SQLite/blob/main/Problem%20and%20Solution/LIMIT%20question/image/number3.png)
