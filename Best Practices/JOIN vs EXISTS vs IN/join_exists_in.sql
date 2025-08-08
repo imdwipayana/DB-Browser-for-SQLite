@@ -48,8 +48,8 @@ SELECT * FROM sales_product;
 -- First method first step:
 SELECT
 	*
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
 WHERE ps.status = 'Delivered';
 
@@ -57,8 +57,8 @@ WHERE ps.status = 'Delivered';
 SELECT
 	ps.product_id,
 	sp.total_sales
-FROM production_status as ps
-INNER JOIN sales_product as sp
+FROM production_status AS ps
+INNER JOIN sales_product AS sp
 ON ps.product_id = sp.product_id
 WHERE ps.status = 'Delivered';
 
@@ -67,15 +67,15 @@ WHERE ps.status = 'Delivered';
 SELECT
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE EXISTS (SELECT 2
-			  FROM production_status as ps
+			  FROM production_status AS ps
 			  WHERE sp.product_id = ps.product_id 
 			     AND ps.status = 'Delivered'
 );
 
 -- Third method: using IN
-WITH CTE_in as (
+WITH CTE_in AS (
 SELECT
 	product_id
 FROM production_status
@@ -84,14 +84,14 @@ WHERE status = 'Delivered'
 SELECT 
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE sp.product_id in (SELECT * FROM CTE_in);
 
 -- The syntax above can be written as subquery as follow:
 SELECT 
 	sp.product_id,
 	sp.total_sales
-FROM sales_product as sp
+FROM sales_product AS sp
 WHERE sp.product_id in (SELECT
 						   product_id
 						FROM production_status
